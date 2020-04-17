@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Tienda 1",
+    "address": "A place far far away",
+    "articles": [
+      {
+        "name": "zapatillas deportivas",
+        "description": "zapatillas para hacer deporte",
+        "price": 100,
+        "totalInShelf": 10,
+        "totalInVault": 10
+      },
+      {
+        "name": "zapatos de cuero",
+        "description": "zapatos negros fabricados con cuero",
+        "price": 150.0,
+        "totalInShelf": 20,
+        "totalInVault": 20
+      }
+    ]
+  }
+]

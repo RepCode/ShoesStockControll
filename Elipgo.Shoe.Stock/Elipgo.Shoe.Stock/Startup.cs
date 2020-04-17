@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using AutoMapper;
 using Elipgo.ShoeStock.Api.Controllers.Middleware;
 using Elipgo.ShoeStock.Database.Data;
+using Elipgo.ShoeStock.Database.Data.Extentions;
 using Elipgo.ShoeStock.Provider;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -38,7 +40,14 @@ namespace Elipgo.Shoe.Stock
 
             services.AddAutoMapper(typeof(Startup));
 
-            services.AddControllers();
+            services.AddControllers().AddJsonOptions(o => o.JsonSerializerOptions.PropertyNamingPolicy = null);
+
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
 
             services.AddSwaggerGen(c =>
             {
@@ -52,6 +61,14 @@ namespace Elipgo.Shoe.Stock
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+            }
+
+            app.UseCors("MyPolicy");
+
+            using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+                serviceScope.ServiceProvider.GetService<ApplicationDbContext>().Database.Migrate();
+                serviceScope.ServiceProvider.GetService<ApplicationDbContext>().EnsureSeeded();
             }
 
             app.ConfigureExceptionHandler();

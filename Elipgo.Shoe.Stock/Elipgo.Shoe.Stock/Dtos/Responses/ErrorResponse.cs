@@ -1,8 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Text.Json.Serialization;
 
 namespace Elipgo.ShoeStock.Api.Dtos.Responses
 {
@@ -12,9 +8,9 @@ namespace Elipgo.ShoeStock.Api.Dtos.Responses
         {
             Success = false;
         }
-        [JsonProperty(PropertyName = "error_code")]
+        [JsonPropertyName("error_code")]
         public int ErrorCode { get; set; }
-        [JsonProperty(PropertyName = "error_message")]
+        [JsonPropertyName("error_message")]
         public string ErrorMessage { get; set; }
     }
 }
