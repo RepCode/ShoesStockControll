@@ -13,12 +13,18 @@ export class ArticlesListComponent implements OnInit {
 
   displayedColumns: string[] = ['id', 'name', 'description', 'price', 'total_in_shelf', 'total_in_vault', 'store_name'];
   articles: Article[];
+  isLoading = true;
+  hasFailed = false;
 
   constructor(private articlesService: ArticlesService) { }
 
   ngOnInit(): void {
-    this.articlesService.getStores().pipe(first()).subscribe(x => {
+    this.articlesService.getArticles().pipe(first()).subscribe(x => {
       this.articles = x;
+      this.isLoading = false;
+    }, error => {
+      this.hasFailed = true;
+      this.isLoading = false;
     });
   }
 

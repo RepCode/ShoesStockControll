@@ -14,5 +14,6 @@ namespace Elipgo.ShoeStock.Provider
         public IQueryable<Store> GetStores();
         public void AddStore(Store store);
         public Task Save();
+        public Store GetStore(int storeId);
     }
 }

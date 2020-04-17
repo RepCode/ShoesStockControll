@@ -1,0 +1,5 @@
+<mat-spinner class="centered-content" *ngIf="isLoading">
+</mat-spinner>
+<ng-content *ngIf="!isLoading && !hasFailed">
+</ng-content>
+<div class="centered-content error-message" *ngIf="hasFailed">Ocurrió un error :(</div>

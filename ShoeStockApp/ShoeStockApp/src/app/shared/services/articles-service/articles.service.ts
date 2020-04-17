@@ -20,7 +20,11 @@ export class ArticlesService {
     this.url = environment.apiBaseUrl + 'services/articles';
    }
 
-  getStores(): Observable<Article[]> {
+  getArticles(): Observable<Article[]> {
     return this.http.get<ArticlesResponse>(this.url).pipe(map(x => x.articles));
+  }
+
+  getStoreArticles(storeId: number): Observable<Article[]> {
+    return this.http.get<ArticlesResponse>(this.url + '/stores/' + storeId).pipe(map(x => x.articles));
   }
 }

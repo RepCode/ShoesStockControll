@@ -1,26 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-
-
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
-
+import { Article } from '../../../shared/models/article';
+import { first } from 'rxjs/operators';
+import { ArticlesService } from '../../../shared/services/articles-service/articles.service';
+import { Store } from 'src/app/shared/models/store';
+import { StoresService } from 'src/app/shared/services/stores-service/stores.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-store',
@@ -28,12 +12,41 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./store.component.scss']
 })
 export class StoreComponent implements OnInit {
-  address = 'algun lugar';
   displayedColumns: string[] = ['id', 'name', 'description', 'price', 'total_in_shelf', 'total_in_vault'];
-  dataSource = ELEMENT_DATA;
-  constructor() { }
+  articles: Article[];
+  store: Store;
+  isLoading = true;
+  hasFailed = false;
+  articlesLoading = true;
+  storeLoading = true;
+
+  constructor(private articlesService: ArticlesService, private storesService: StoresService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      this.storesService.getStore(params.id).pipe(first()).subscribe(x => {
+        this.store = x;
+        this.storeLoading = false;
+        this.setLoading();
+      }, error => {
+        this.hasFailed = true;
+        this.storeLoading = false;
+        this.setLoading(true);
+      });
+      this.articlesService.getArticles().pipe(first()).subscribe(x => {
+        this.articles = x;
+        this.articlesLoading = false;
+        this.setLoading();
+      }, error => {
+        this.hasFailed = true;
+        this.articlesLoading = false;
+        this.setLoading(true);
+      });
+    });
+  }
+
+  setLoading(setFalse = false) {
+    this.isLoading = (this.storeLoading && this.articlesLoading) || setFalse;
   }
 
 }

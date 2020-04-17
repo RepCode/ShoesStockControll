@@ -11,6 +11,12 @@ export interface StoresResponse {
   stores: Store[];
 }
 
+export interface StoreResponse {
+  sucess: boolean;
+  total_elements: number;
+  store: Store;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -24,5 +30,9 @@ export class StoresService {
 
   getStores(): Observable<Store[]> {
     return this.http.get<StoresResponse>(this.url).pipe(map(x => x.stores));
+  }
+
+  getStore(id: number): Observable<Store> {
+    return this.http.get<StoreResponse>(this.url + '/' + id).pipe(map(x => x.store));
   }
 }
