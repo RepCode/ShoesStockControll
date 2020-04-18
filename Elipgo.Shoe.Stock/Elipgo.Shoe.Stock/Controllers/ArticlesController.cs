@@ -4,12 +4,14 @@ using AutoMapper;
 using Elipgo.ShoeStock.Api.Constants;
 using Elipgo.ShoeStock.Api.Dtos.Responses;
 using Elipgo.ShoeStock.Provider;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Elipgo.ShoeStock.Api.Controllers
 {
     [Route("services/articles")]
     [ApiController]
+    [Authorize]
     public class ArticlesController : ControllerBase
     {
         protected readonly IDatabaseProvider _databaseProvider;

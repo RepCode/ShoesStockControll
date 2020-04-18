@@ -18,5 +18,10 @@
         "totalInVault": 20
       }
     ]
+  },
+  {
+    "name": "Tienda 2",
+    "address": "A place far far far away",
+    "articles": []
   }
 ]

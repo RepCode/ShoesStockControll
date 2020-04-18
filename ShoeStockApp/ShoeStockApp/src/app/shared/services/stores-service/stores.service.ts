@@ -4,6 +4,7 @@ import { Store } from '../../models/store';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { AuthService } from 'src/app/core/auth/auth.service';
 
 export interface StoresResponse {
   sucess: boolean;
@@ -24,15 +25,15 @@ export class StoresService {
 
   url: string;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private authService: AuthService) {
     this.url = environment.apiBaseUrl + 'services/stores';
    }
 
   getStores(): Observable<Store[]> {
-    return this.http.get<StoresResponse>(this.url).pipe(map(x => x.stores));
+    return this.http.get<StoresResponse>(this.url, this.authService.getAuthHeader()).pipe(map(x => x.stores));
   }
 
   getStore(id: number): Observable<Store> {
-    return this.http.get<StoreResponse>(this.url + '/' + id).pipe(map(x => x.store));
+    return this.http.get<StoreResponse>(this.url + '/' + id, this.authService.getAuthHeader()).pipe(map(x => x.store));
   }
 }

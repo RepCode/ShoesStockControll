@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ArticlesListComponent } from './articles-list/articles-list.component'
+import { AuthGuardService } from '../../core/auth/auth-guard.service';
 
 const routes: Routes = [
   {
     path: '',
-    component: ArticlesListComponent
+    component: ArticlesListComponent,
+    canActivate: [AuthGuardService]
   }
 ];
 

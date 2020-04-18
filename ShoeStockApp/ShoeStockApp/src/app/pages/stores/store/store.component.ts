@@ -31,7 +31,7 @@ export class StoreComponent implements OnInit {
       }, error => {
         this.hasFailed = true;
         this.storeLoading = false;
-        this.setLoading(true);
+        this.setLoading();
       });
       this.articlesService.getArticles().pipe(first()).subscribe(x => {
         this.articles = x;
@@ -40,13 +40,13 @@ export class StoreComponent implements OnInit {
       }, error => {
         this.hasFailed = true;
         this.articlesLoading = false;
-        this.setLoading(true);
+        this.setLoading();
       });
     });
   }
 
-  setLoading(setFalse = false) {
-    this.isLoading = (this.storeLoading && this.articlesLoading) || setFalse;
+  setLoading() {
+    this.isLoading = (this.storeLoading && this.articlesLoading);
   }
 
 }

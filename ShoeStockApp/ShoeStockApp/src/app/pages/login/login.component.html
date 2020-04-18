@@ -1,0 +1,18 @@
+<div class="wrapper">
+    <div class="centered-content login-form">
+        <h1 class="login-title">Login</h1>
+        <form [formGroup]="loginForm" class="form" (ngSubmit)="onSubmit(loginForm.value)">
+            <mat-form-field class="full-width">
+                <mat-label>Usuario</mat-label>
+                <input formControlName="username" matInput value="">
+            </mat-form-field>
+    
+            <mat-form-field class="full-width">
+                <mat-label>Password</mat-label>
+                <input formControlName="password" type="password" matInput>
+            </mat-form-field>
+            <button type="submit" mat-raised-button color="primary">Login</button>
+        </form>
+        <h2 class="error-message" *ngIf="displayError">ocurrió un error</h2>
+    </div>
+</div>
