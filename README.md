@@ -1,2 +1,4 @@
-# ShoesStockControll
-Code challenge for Elipgo about Stock Controll for a shoe company.
+### ShoesStockControll
+#Code challenge for Elipgo about Stock Controll for a shoe company.
+
+#When the code-first DB is created 2 users are seeded, 'admin' and 'usuario' both with Password: 'Password1!'
