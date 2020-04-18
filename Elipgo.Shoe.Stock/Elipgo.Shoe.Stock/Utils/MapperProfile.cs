@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Elipgo.ShoeStock.Api.Dtos.Requests;
 using Elipgo.ShoeStock.Api.Dtos.Responses;
 using Elipgo.ShoeStock.Database.Models;
 using System;
@@ -14,6 +15,8 @@ namespace Elipgo.ShoeStock.Api.Utils
         {
             CreateMap<Store, StoreDto>();
             CreateMap<Article, ArticleDto>().ForMember(dest => dest.StoreName, opt => opt.MapFrom(src => src.Store.Name));
+            CreateMap<ArticleRequestDto, Article>();
+            CreateMap<Article, ArticleDto>();
         }
     }
 }

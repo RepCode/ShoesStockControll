@@ -1,5 +1,5 @@
 export interface User{
     userName: string;
-    isAdmin: boolean;
+    is_admin: boolean;
     token: string;
 }

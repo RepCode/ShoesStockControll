@@ -12,6 +12,15 @@ export interface ArticlesResponse {
   articles: Article[];
 }
 
+export interface ArticleForm {
+  name: string;
+  description: string;
+  price: number;
+  total_in_shelf: number;
+  total_in_vault: number;
+  store_id: number;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -27,5 +36,9 @@ export class ArticlesService {
 
   getStoreArticles(storeId: number): Observable<Article[]> {
     return this.http.get<ArticlesResponse>(this.url + '/stores/' + storeId, this.authService.getAuthHeader()).pipe(map(x => x.articles));
+  }
+
+  createStoreArticle(article: ArticleForm) {
+    return this.http.post<Article>(this.url, article, this.authService.getAuthHeader());
   }
 }

@@ -50,6 +50,11 @@ namespace Elipgo.ShoeStock.Provider
             return stores.Get(x => x.Id == storeId).FirstOrDefault();
         }
 
+        public void AddArticleToStore(Article article)
+        {
+            articles.Insert(article);
+        }
+
         public async Task Save()
         {
             await _context.SaveChangesAsync();

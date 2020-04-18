@@ -1,0 +1,31 @@
+<h1 mat-dialog-title>Agregar artículo a la tienda</h1>
+<div mat-dialog-content>
+  <form [formGroup]="articleForm" class="form">
+    <mat-form-field>
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="name">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Descripción</mat-label>
+      <input matInput formControlName="description">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Precio</mat-label>
+      <input matInput type="number" formControlName="price">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Total en estantería</mat-label>
+      <input matInput type="number" formControlName="total_in_shelf">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Total en Depósito</mat-label>
+      <input matInput type="number" formControlName="total_in_vault">
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <div class="buttons-section">
+    <button mat-raised-button color="secondary" (click)="onCancel()">Cancelar</button>
+    <button mat-raised-button color="primary" (click)="onSubmit()" cdkFocusInitial>Ok</button>
+  </div>
+</div>

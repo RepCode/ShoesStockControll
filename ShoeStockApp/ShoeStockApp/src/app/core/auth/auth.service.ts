@@ -43,5 +43,9 @@ export class AuthService {
       headers: { Authorization: 'Bearer ' + this.user.token }
     };
   }
+
+  public isAdmin(): boolean {
+    return this.user.is_admin;
+  }
 }
 

@@ -7,7 +7,8 @@ import { StoreComponent } from './store/store.component';
 import { SharedModule } from '../../shared/shared.module';
 import { ArticlesService } from '../../shared/services/articles-service/articles.service';
 import { StoresService } from '../../shared/services/stores-service/stores.service';
-
+import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   providers: [ArticlesService, StoresService],
@@ -16,7 +17,9 @@ import { StoresService } from '../../shared/services/stores-service/stores.servi
     CommonModule,
     MatTableModule,
     SharedModule,
-    StoresRoutingModule
+    StoresRoutingModule,
+    MatButtonModule,
+    MatSnackBarModule
   ]
 })
 export class StoresModule { }

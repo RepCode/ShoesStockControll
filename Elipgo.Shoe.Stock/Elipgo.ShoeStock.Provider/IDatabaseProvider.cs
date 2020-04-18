@@ -15,5 +15,6 @@ namespace Elipgo.ShoeStock.Provider
         public void AddStore(Store store);
         public Task Save();
         public Store GetStore(int storeId);
+        public void AddArticleToStore(Article article);
     }
 }
